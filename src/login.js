@@ -29,9 +29,9 @@ export default class Login extends Component {
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
                 <View style={styles.containerView}>
                     <SafeAreaView>
+                        <Image style={styles.imagenUser} source={require('../assets/login-user.png')}></Image>
                         <Text>Nombre de usuario:</Text>
                         <View>
-                            <Image style={styles.imagenUser} source={require('../assets/login-user.png')}></Image>
                             <TextInput onChangeText={(text) => { this.setState({nombreInput: text}) }} style={styles.input} placeholder="Usuario" keyboardType="default"/>
                         </View>
                         <Text>Contraseña:</Text>
