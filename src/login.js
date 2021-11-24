@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, TouchableOpacity, Image, View, TextInput, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Image, View, TextInput, SafeAreaView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import {Actions } from 'react-native-router-flux';
 
 
@@ -7,10 +7,20 @@ import {Actions } from 'react-native-router-flux';
 export default class Login extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            nombre:'Juan',
+            pass:'pass123',
+            nombreInput: '',
+            passInput:''
+        }
     }
 
-    goHome = () => {
-        Actions.home()
+    validar = () => {
+        if( (this.state.nombreInput == this.state.nombre) && (this.state.passInput == this.state.pass)){
+            Actions.home()
+        }else{
+            Alert.alert('Usuario o constraseña incorrecto')
+        }
     }
 
     
@@ -22,12 +32,12 @@ export default class Login extends Component {
                         <Text>Nombre de usuario:</Text>
                         <View>
                             <Image style={styles.imagenUser} source={require('../assets/login-user.png')}></Image>
-                            <TextInput style={styles.input} placeholder="Usuario" keyboardType="default"/>
+                            <TextInput onChangeText={(text) => { this.setState({nombreInput: text}) }} style={styles.input} placeholder="Usuario" keyboardType="default"/>
                         </View>
                         <Text>Contraseña:</Text>
-                        <TextInput style={styles.input} placeholder="Contraseña" keyboardType="default"/>
+                        <TextInput onChangeText={(text) => { this.setState({passInput: text})}} style={styles.input} placeholder="Contraseña" keyboardType="default"/>
                     </SafeAreaView>
-                    <TouchableOpacity style={styles.button} onPress={this.goHome}>
+                    <TouchableOpacity style={styles.button} onPress={() => {this.validar()}}>
                         <Text style={styles.textoWhite}>Ingresar</Text>
                     </TouchableOpacity>
                 </View>
@@ -38,7 +48,6 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     containerUser:{
-        display:""
     },
     imagenUser:{
         width:50,

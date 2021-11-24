@@ -14,3 +14,4 @@ export default class App extends Component {
     );
   }
 }
+AppRegistry.registerComponent('Login', () => App)
